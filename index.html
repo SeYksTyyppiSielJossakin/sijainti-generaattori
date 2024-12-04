@@ -1,31 +1,17 @@
-<!DOCTYPE html><html><head>    
-  <title>OpenStreetMap-tehtävä</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> 
-  <style>        
-    #map {            
-      height: 500px; /* Kartan korkeus */           
-      width: 100%;   /* Kartan leveys */        }        
-    button {            
-      display: block;            
-      margin: 10px auto;            
-      padding: 10px 20px;            
-      background-color: #0078D7;            
-      color: white;            
-      border: none;            
-      border-radius: 5px;            
-      cursor: pointer;        }        
-    button:
-      hover {            
-      background-color: #005A9E;        }    
-  </style>
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <title>OpenStreetMap-tehtävä</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <link rel="stylesheet" href="style.css">
 </head>
-  <body>    
-    <h1 style="text-align: center;">Satunnainen sijaintigeneraattori</h1>    
-    <div id="map">
-      
-    </div>    
-    <button id="satunnainenSijainti">Näytä satunnainen sijainti</button>    
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>    
+<body>
+    <h1 style="text-align: center;">Satunnainen sijaintigeneraattori</h1>
+    
+    <div id="map"></div>
+    <button id="satunnainenSijainti">Näytä satunnainen sijainti</button>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="app.js"></script>
-  </body>
+</body>
 </html>
