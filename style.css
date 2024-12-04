@@ -1,8 +1,8 @@
-
 #map {
     height: 500px;
     width: 100%;
 }
+
 button {
     display: block;
     margin: 10px auto;
@@ -13,6 +13,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+
 button:hover {
     background-color: #005A9E;
 }
