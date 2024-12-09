@@ -23,8 +23,8 @@ fetch('https://raw.githubusercontent.com/SeYksTyyppiSielJossakin/sijainti-genera
 
       // Luodaan satunnainen sijainti niin, että se on Suomen alueella
       do {
-        lat = 59.5 + Math.random() * (70 - 59.5); // Suomen leveysasteet
-        lng = 20.5 + Math.random() * (31.5 - 20.5); // Suomen pituusasteet
+        lat = 59.5 + Math.random() * (data); // Suomen leveysasteet
+        lng = 20.5 + Math.random() * (data); // Suomen pituusasteet
         randomLocation = [lat, lng];
       } while (!turf.booleanPointInPolygon(randomLocation, suomiGeoJSON)); // Tarkistetaan, onko sijainti Suomen rajojen sisällä
 
