@@ -1,26 +1,31 @@
-// Alustetaan kartta
-const map = L.map('map').setView([60.1699, 24.9384], 6); // Suomen keskikohta
+    // Alustetaan kartta
+    const map = L.map('map').setView([60.1699, 24.9384], 6); // Suomen keskikohta
 
-// Lisätään OpenStreetMapin laatat
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19,
-  attribution: '© OpenStreetMap contributors'
-}).addTo(map);
+    // Lisätään OpenStreetMapin laatat
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-let suomiGeoJSON = null;  //*
+    let suomiGeoJSON = null;
 
-// Lataa Suomen rajat GeoJSON:sta
-// fetch('path_to_your_local_or_remote/fi.json') // Korvaa oikealla polulla
-fetch('https://raw.githubusercontent.com/SeYksTyyppiSielJossakin/sijainti-generaattori/main/fi.json') // Korvaa oikealla polulla
-  .then(response => response.json())
-  .then(data => {
-    const suomiGeoJSON = data;
+    // Lataa Suomen rajat GeoJSON:sta
+    fetch('https://raw.githubusercontent.com/username/suomi-satunnainen-sijainti/main/fi.json')
+      .then(response => response.json())
+      .then(data => {
+        suomiGeoJSON = data;
 
-    // Lisää Suomen rajat kartalle
-    L.geoJSON(suomiGeoJSON).addTo(map);
-  })          //*
-  .catch(error => console.log('Virhe ladattaessa GeoJSON-tiedostoa:', error)); //*
+        // Lisää Suomen rajat kartalle
+        L.geoJSON(suomiGeoJSON).addTo(map);
+        
+        // Varmistetaan, että GeoJSON on ladattu oikein
+        console.log("GeoJSON ladattu oikein:", suomiGeoJSON);
+      })
+      .catch(error => {
+        console.log('Virhe ladattaessa GeoJSON-tiedostoa:', error);
+      });
 
+    // Lisää toiminnallisuus satunnaisille sijainneille
     document.getElementById("satunnainenSijainti").addEventListener("click", () => {
       if (suomiGeoJSON === null) {
         console.error('Suomen rajat eivät ole vielä ladattuna!');
@@ -36,6 +41,9 @@ fetch('https://raw.githubusercontent.com/SeYksTyyppiSielJossakin/sijainti-genera
         randomLocation = [lat, lng];
       } while (!turf.booleanPointInPolygon(randomLocation, suomiGeoJSON)); // Tarkistetaan, onko sijainti Suomen rajojen sisällä
 
+      // Varmistetaan, että satunnainen sijainti on oikein
+      console.log('Satunnainen sijainti:', randomLocation);
+
       // Keskitetään kartta ja lisätään markkeri
       map.setView(randomLocation, 10);
       
@@ -43,5 +51,7 @@ fetch('https://raw.githubusercontent.com/SeYksTyyppiSielJossakin/sijainti-genera
       L.marker(randomLocation).addTo(map)
         .bindPopup(`Satunnainen sijainti: ${lat.toFixed(4)}, ${lng.toFixed(4)}`)
         .openPopup();
-    });
 
+      // Varmistetaan, että markkeri lisätään
+      console.log('Lisätään markkeri sijaintiin:', randomLocation);
+    });
