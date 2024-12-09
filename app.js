@@ -9,7 +9,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Lataa Suomen rajat GeoJSON:sta
 // fetch('path_to_your_local_or_remote/fi.json') // Korvaa oikealla polulla
-fetch('C:/Käyttäjät/Oskar L/Työpöytä/app/fi.json') // Korvaa oikealla polulla
+fetch('https://raw.githubusercontent.com/SeYksTyyppiSielJossakin/sijainti-generaattori/main/fi.json') // Korvaa oikealla polulla
   .then(response => response.json())
   .then(data => {
     const suomiGeoJSON = data;
