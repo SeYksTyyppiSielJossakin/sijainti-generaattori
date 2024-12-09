@@ -7,6 +7,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
+let suomiGeoJSON = null;  //*
+
 // Lataa Suomen rajat GeoJSON:sta
 // fetch('path_to_your_local_or_remote/fi.json') // Korvaa oikealla polulla
 fetch('https://raw.githubusercontent.com/SeYksTyyppiSielJossakin/sijainti-generaattori/main/fi.json') // Korvaa oikealla polulla
@@ -16,9 +18,15 @@ fetch('https://raw.githubusercontent.com/SeYksTyyppiSielJossakin/sijainti-genera
 
     // Lisää Suomen rajat kartalle
     L.geoJSON(suomiGeoJSON).addTo(map);
+  })          //*
+  .catch(error => console.log('Virhe ladattaessa GeoJSON-tiedostoa:', error)); //*
 
-    // Lisää toiminnallisuus satunnaisille sijainneille
     document.getElementById("satunnainenSijainti").addEventListener("click", () => {
+      if (suomiGeoJSON === null) {
+        console.error('Suomen rajat eivät ole vielä ladattuna!');
+        return;
+      }
+
       let lat, lng, randomLocation;
 
       // Luodaan satunnainen sijainti niin, että se on Suomen alueella
@@ -30,9 +38,10 @@ fetch('https://raw.githubusercontent.com/SeYksTyyppiSielJossakin/sijainti-genera
 
       // Keskitetään kartta ja lisätään markkeri
       map.setView(randomLocation, 10);
+      
+      // Lisätään markkeri satunnaiseen sijaintiin
       L.marker(randomLocation).addTo(map)
         .bindPopup(`Satunnainen sijainti: ${lat.toFixed(4)}, ${lng.toFixed(4)}`)
         .openPopup();
     });
-  })
-  .catch(error => console.log('Virhe ladattaessa GeoJSON-tiedostoa:', error));
+
