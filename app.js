@@ -10,7 +10,7 @@
     let suomiGeoJSON = null;
 
     // Lataa Suomen rajat GeoJSON:sta
-    fetch('https://raw.githubusercontent.com/username/suomi-satunnainen-sijainti/main/fi.json')
+    fetch('https://raw.githubusercontent.com/SeYksTyyppiSielJossakin/sijainti-generaattori/main/fi.json')
       .then(response => response.json())
       .then(data => {
         suomiGeoJSON = data;
